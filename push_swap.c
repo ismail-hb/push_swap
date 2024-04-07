@@ -6,11 +6,126 @@
 /*   By: ishouche <ishouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 10:14:43 by ishouche          #+#    #+#             */
-/*   Updated: 2024/04/07 03:11:09 by ishouche         ###   ########.fr       */
+/*   Updated: 2024/04/07 19:30:01 by ishouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+bool	is_in_list(int	digit, t_list *a)
+{
+	while(a)
+	{
+		if (*(int*)a->content == digit)
+			return(false);
+		a = a->next;
+	}
+	return (true);
+}
+
+bool	is_number(char *final)
+{
+	int	i;
+
+	i = -1;
+	while(final[++i])
+		if (!ft_isdigit(final[i]))
+			return (false);
+	return (true);
+}
+
+bool	fit_in_int(char *final)
+{
+	int	i;
+	int	sign;
+	int	len;
+
+	sign = 1;
+	i = 0;
+	if(final[0] == '-')
+	{
+		sign *= -1;
+		i++;
+	}
+	len = ft_strlen(final + i);
+	if (len > 10)
+		return (false);
+	if (len == 10)
+	{
+		if (sign == 1)
+			return (ft_strncmp(final + i, "2147483647", 10) <= 0);
+		return (ft_strncmp(final + i, "2147483648", 10) <= 0);
+	}
+	return(true);
+}
+
+void	free2D(char **final)
+{
+	int	i;
+
+	i = -1;
+	if(final)
+	{
+		while(final[++i])
+			free(final[i]);
+		free (final);
+	}
+}
+bool	parse_arg(char *str, t_list **a)
+{
+	char	**final;
+	int		i;
+	int		*digit;
+	t_list	*new;
+
+	final = ft_split(str, ' ');
+	if (!final || !final[0])
+		return (free2D(final), false);
+	i = -1;
+	while (final[++i])
+	{
+		if (!is_number(final[i]) || !fit_in_int(final[i]))
+			return (free2D(final), ft_lstclear(a, free), false);
+		digit = malloc(sizeof(int));
+		if (!digit)
+			return (free2D(final), ft_lstclear(a, free), false);
+		*digit = ft_atoi(final[i]);
+		new = ft_lstnew(digit);
+		if(is_in_list(*digit, *a))
+			return(free2D(final), ft_lstclear(a, free), false);
+		ft_lstadd_back(a, new);
+
+	}
+	return (free2D(final), true);
+}
+bool	parse(int argc, char **argv, t_list **a)
+{
+	int	i;
+
+	i = 0;
+	while (++i < argc)
+		if (!parse_arg(argv[i], a))
+			return(false);
+	return (true);
+}
+
+bool	pile_is_sorted(t_list *a)
+{
+	int	tmp;
+
+	if (!a)
+		return(false);
+	tmp = *(int*)a->content;
+	a = a->next;
+	while(a)
+	{
+		if (*(int*)a->content > tmp)
+			return(false);
+		tmp = *(int*)a->content;
+		a = a->next;
+	}
+	return (true);
+}
 
 int	main(int argc, char **argv)
 {
@@ -19,11 +134,10 @@ int	main(int argc, char **argv)
 
 	a = NULL;
 	b = NULL;
-	if (argc == 1 || (argc == 2 && !argv[1][0]))
-		return(ft_printf("Error"), 1);
-	else if (argc == 2)
-		argv = split(argv[1], ' ');
-	init_a(&a, argv + 1);
+	if (argc == 1)
+		return(1);
+	if (!parse(argc, argv, &a))
+		return (write(2, "Error", 5), 1);
 	if (!pile_is_sorted(a))
 	{
 		if (pile_len(a) == 2)
@@ -33,6 +147,6 @@ int	main(int argc, char **argv)
 		else
 			big_sort(&a, &b);
 	}
-	free_pile(&a);
+	ft_lstclear(&a, free);
 	return(0);
 }
