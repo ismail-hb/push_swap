@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ishouche <ishouche@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ismail <ismail@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 10:14:43 by ishouche          #+#    #+#             */
-/*   Updated: 2024/04/07 19:30:01 by ishouche         ###   ########.fr       */
+/*   Updated: 2024/04/09 16:17:00 by ismail           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ bool	is_in_list(int	digit, t_list *a)
 	while(a)
 	{
 		if (*(int*)a->content == digit)
-			return(false);
+			return(true);
 		a = a->next;
 	}
-	return (true);
+	return (false);
 }
 
 bool	is_number(char *final)
@@ -47,6 +47,8 @@ bool	fit_in_int(char *final)
 		sign *= -1;
 		i++;
 	}
+	if (final[0] == '+')
+		i++;
 	len = ft_strlen(final + i);
 	if (len > 10)
 		return (false);
