@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movement.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ismail <ismail@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ishouche <ishouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 16:22:27 by ismail            #+#    #+#             */
-/*   Updated: 2024/04/12 07:09:00 by ismail           ###   ########.fr       */
+/*   Updated: 2024/04/13 04:04:04 by ishouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,43 +16,104 @@
 void	sa(t_list **a)
 {
 	 t_list	*tmp;
+	 t_list	*tmp2;
 
-	 tmp = *a;
-	(*a)->content = (*a)->next;
-	(*a) = (*a)->next;
-	(*a)->content = tmp->content;
+	tmp = (*a)->next->content;
+	(*a)->next->content = (*a)->content;
+	(*a)->content = tmp;
+}
+void	sb(t_list **b)
+{
+	 t_list	*tmp;
+	 t_list	*tmp2;
+
+	tmp = (*b)->next->content;
+	(*b)->next->content = (*b)->content;
+	(*b)->content = tmp;
 }
 
 void	pa(t_list **a, t_list **b)
 {
-	ft_lstadd_front(a, *b);
-	free((*b)->content);
+	t_list	*tmp;
+
+	if (!b)
+		return ;
+	tmp = *b;
+	*b = (*b)->next;
+	tmp->next = *a;
+	(*a) = tmp;
+}
+
+void	pb(t_list **b, t_list **a)
+{
+	t_list	*tmp;
+
+	if (!a)
+		return ;
+	tmp = *a;
+	*a = (*a)->next;
+	tmp->next = *b;
+	(*b) = tmp;
 }
 
 void	ra(t_list **a)
 {
 	t_list	*tmp;
+	t_list	*first_node;
 
+	if (*a == NULL || (*a)->next == NULL)
+		return ;
+	first_node = *a;
+	*a = (*a)->next;
 	tmp = *a;
-	free((*a)->content);
-	ft_lstadd_back(a, tmp);
+	while (tmp->next)
+		tmp = tmp->next;
+	tmp->next = first_node;
+	first_node->next = NULL;
+}
+
+void	rb(t_list **b)
+{
+	t_list	*tmp;
+	t_list	*first_node;
+
+	if (*b == NULL || (*b)->next == NULL)
+		return ;
+	first_node = *b;
+	*b = (*b)->next;
+	tmp = *b;
+	while (tmp->next)
+		tmp = tmp->next;
+	tmp->next = first_node;
+	first_node->next = NULL;
 }
 
 int	main(void)
 {
 	t_list	*a;
-	int	*i = 0;
+	t_list	*b;
+	int in;
+	int	i[5] = {0, 1, 2, 3, 4};
 
+	b = NULL;
 	a = NULL;
-	while ((long int)i < 5)
+	in = 0;
+	while (in < 5)
 	{
-		ft_lstadd_front(&a, ft_lstnew((int *)i));
-		i++;
+		ft_lstadd_front(&a, ft_lstnew(&i[in]));
+		in++;
 	}
-	ra(&a);
-	while(a->next != NULL)
+	ft_lstadd_front(&b, ft_lstnew(&i[4]));
+	pa(&a, &b);
+	while (a)
 	{
-		printf("%ld", (long int)a->content);
+		printf("a : %i\n", *(int*)a->content);
 		a = a->next;
 	}
+	while (b)
+	{
+		printf("b : %i\n", *(int*)b->content);
+		b = b->next;
+	}
+	free(a);
 }
