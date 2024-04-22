@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   movement.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ishouche <ishouche@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ismail <ismail@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 16:22:27 by ismail            #+#    #+#             */
-/*   Updated: 2024/04/13 04:04:04 by ishouche         ###   ########.fr       */
+/*   Updated: 2024/04/22 03:57:31 by ismail           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include "libft/libft.h"
 
 void	sa(t_list **a)
 {
@@ -88,32 +87,32 @@ void	rb(t_list **b)
 	first_node->next = NULL;
 }
 
-int	main(void)
-{
-	t_list	*a;
-	t_list	*b;
-	int in;
-	int	i[5] = {0, 1, 2, 3, 4};
+// int	main(void)
+// {
+// 	t_list	*a;
+// 	t_list	*b;
+// 	int in;
+// 	int	i[5] = {0, 1, 2, 3, 4};
 
-	b = NULL;
-	a = NULL;
-	in = 0;
-	while (in < 5)
-	{
-		ft_lstadd_front(&a, ft_lstnew(&i[in]));
-		in++;
-	}
-	ft_lstadd_front(&b, ft_lstnew(&i[4]));
-	pa(&a, &b);
-	while (a)
-	{
-		printf("a : %i\n", *(int*)a->content);
-		a = a->next;
-	}
-	while (b)
-	{
-		printf("b : %i\n", *(int*)b->content);
-		b = b->next;
-	}
-	free(a);
-}
+// 	b = NULL;
+// 	a = NULL;
+// 	in = 0;
+// 	while (in < 5)
+// 	{
+// 		ft_lstadd_front(&a, ft_lstnew(&i[in]));
+// 		in++;
+// 	}
+// 	ft_lstadd_front(&b, ft_lstnew(&i[4]));
+// 	pa(&a, &b);
+// 	while (a)
+// 	{
+// 		printf("a : %i\n", *(int*)a->content);
+// 		a = a->next;
+// 	}
+// 	while (b)
+// 	{
+// 		printf("b : %i\n", *(int*)b->content);
+// 		b = b->next;
+// 	}
+// 	free(a);
+// }

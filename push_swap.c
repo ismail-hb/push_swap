@@ -6,7 +6,7 @@
 /*   By: ismail <ismail@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 10:14:43 by ishouche          #+#    #+#             */
-/*   Updated: 2024/04/09 16:17:00 by ismail           ###   ########.fr       */
+/*   Updated: 2024/04/22 04:16:31 by ismail           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,10 +96,10 @@ bool	parse_arg(char *str, t_list **a)
 		if(is_in_list(*digit, *a))
 			return(free2D(final), ft_lstclear(a, free), false);
 		ft_lstadd_back(a, new);
-
 	}
 	return (free2D(final), true);
 }
+
 bool	parse(int argc, char **argv, t_list **a)
 {
 	int	i;
@@ -121,12 +121,25 @@ bool	pile_is_sorted(t_list *a)
 	a = a->next;
 	while(a)
 	{
-		if (*(int*)a->content > tmp)
+		if (*(int*)a->content < tmp)
 			return(false);
 		tmp = *(int*)a->content;
 		a = a->next;
 	}
 	return (true);
+}
+
+int	pile_len(t_list *lst)
+{
+	int	i;
+
+	i = 0;
+	while(lst)
+	{
+		lst = lst->next;
+		i++;
+	}
+	return(i);
 }
 
 int	main(int argc, char **argv)
@@ -139,15 +152,23 @@ int	main(int argc, char **argv)
 	if (argc == 1)
 		return(1);
 	if (!parse(argc, argv, &a))
-		return (write(2, "Error", 5), 1);
+		return (write(2, "Error\n", 6), 1);
 	if (!pile_is_sorted(a))
 	{
 		if (pile_len(a) == 2)
 			sa(&a);
-		else if (pile_len(a) <= 5)
-			small_sort(&a, &b);
+		// else if (pile_len(a) <= 5)
+		// 	small_sort(&a, &b);
 		else
+		{
+			put_index(&a);
 			big_sort(&a, &b);
+		}
+	}
+	while (a)
+	{
+		printf("a : %i\n", *(int*)a->content);
+		a = a->next;
 	}
 	ft_lstclear(&a, free);
 	return(0);
