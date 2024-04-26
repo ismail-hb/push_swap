@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movement.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ismail <ismail@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ishouche <ishouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 16:22:27 by ismail            #+#    #+#             */
-/*   Updated: 2024/04/22 03:57:31 by ismail           ###   ########.fr       */
+/*   Updated: 2024/04/26 02:54:53 by ishouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	sa(t_list **a)
 	tmp = (*a)->next->content;
 	(*a)->next->content = (*a)->content;
 	(*a)->content = tmp;
+	write(1, "sa\n", 3);
 }
 void	sb(t_list **b)
 {
@@ -29,6 +30,7 @@ void	sb(t_list **b)
 	tmp = (*b)->next->content;
 	(*b)->next->content = (*b)->content;
 	(*b)->content = tmp;
+	write(1, "sb\n", 3);
 }
 
 void	pa(t_list **a, t_list **b)
@@ -41,6 +43,7 @@ void	pa(t_list **a, t_list **b)
 	*b = (*b)->next;
 	tmp->next = *a;
 	(*a) = tmp;
+	write(1, "pa\n", 3);
 }
 
 void	pb(t_list **b, t_list **a)
@@ -53,6 +56,7 @@ void	pb(t_list **b, t_list **a)
 	*a = (*a)->next;
 	tmp->next = *b;
 	(*b) = tmp;
+	write(1, "pb\n", 3);
 }
 
 void	ra(t_list **a)
@@ -69,6 +73,7 @@ void	ra(t_list **a)
 		tmp = tmp->next;
 	tmp->next = first_node;
 	first_node->next = NULL;
+	write(1, "ra\n", 3);
 }
 
 void	rb(t_list **b)
@@ -85,6 +90,7 @@ void	rb(t_list **b)
 		tmp = tmp->next;
 	tmp->next = first_node;
 	first_node->next = NULL;
+	write(1, "rb\n", 3);
 }
 
 // int	main(void)
