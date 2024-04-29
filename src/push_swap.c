@@ -6,7 +6,7 @@
 /*   By: ishouche <ishouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 10:14:43 by ishouche          #+#    #+#             */
-/*   Updated: 2024/04/29 16:27:12 by ishouche         ###   ########.fr       */
+/*   Updated: 2024/04/29 19:26:52 by ishouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,8 @@ int	main(int argc, char **argv)
 	{
 		if (pile_len(a) == 2)
 			sa(&a);
-		else if (pile_len(a) <= 5)
-			small_sort(&a, &b);
+		// else if (pile_len(a) <= 5)
+		// 	small_sort(&a, &b);
 		else
 		{
 			put_index(&a);

@@ -1,62 +1,109 @@
-DEBUG	=	1
+#  |  |  ___ \    \  |         |
+#  |  |     ) |  |\/ |   _  |  |  /   _ 
+# ___ __|  __/   |   |  (   |    <    __/ 
+#    _|  _____| _|  _| \__,_| _|\_\ \___|
+#                              by jcluzet
+################################################################################
+#                                     CONFIG                                   #
+################################################################################
 
-NAME	=	push_swap
-INC_DIR	=	src
-SRC_DIR	=	src
-OBJ_DIR	=	obj
-INC	  	=	$(addprefix $(INC_DIR)/,	push_swap.h)
-SRC	  	=	$(addprefix $(SRC_DIR)/,	\
-																		algorithm.c	\
-																		push_swap.c		\
-																		algorithm.c	\
-																		movement.c	\
-																		movement2.c	\
-																		push_swap_utils.c	\
-																		put_index.c)
-OBJ		=	$(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
+NAME        := push_swap
+CC        := gcc
+FLAGS    := -Wall -Wextra -Werror 
+################################################################################
+#                                 PROGRAM'S SRCS                               #
+################################################################################
 
-LIBFT_A =	./libft/libft.a
+SRCS        :=      libft/ft_atoi.c \
+                          libft/ft_bzero.c \
+                          libft/ft_calloc.c \
+                          libft/ft_isalnum.c \
+                          libft/ft_isalpha.c \
+                          libft/ft_isascii.c \
+                          libft/ft_isdigit.c \
+                          libft/ft_isprint.c \
+                          libft/ft_itoa.c \
+                          libft/ft_lstadd_back_bonus.c \
+                          libft/ft_lstadd_front_bonus.c \
+                          libft/ft_lstclear_bonus.c \
+                          libft/ft_lstdelone_bonus.c \
+                          libft/ft_lstiter_bonus.c \
+                          libft/ft_lstlast_bonus.c \
+                          libft/ft_lstmap_bonus.c \
+                          libft/ft_lstnew_bonus.c \
+                          libft/ft_lstsize_bonus.c \
+                          libft/ft_memchr.c \
+                          libft/ft_memcmp.c \
+                          libft/ft_memcpy.c \
+                          libft/ft_memmove.c \
+                          libft/ft_memset.c \
+                          libft/ftprintf2.c \
+                          libft/ftprintf.c \
+                          libft/ft_putchar_fd.c \
+                          libft/ft_putendl_fd.c \
+                          libft/ft_putnbr_fd.c \
+                          libft/ft_putstr_fd.c \
+                          libft/ft_split.c \
+                          libft/ft_strchr.c \
+                          libft/ft_strdup.c \
+                          libft/ft_striteri.c \
+                          libft/ft_strjoin.c \
+                          libft/ft_strlcat.c \
+                          libft/ft_strlcpy.c \
+                          libft/ft_strlen.c \
+                          libft/ft_strmapi.c \
+                          libft/ft_strncmp.c \
+                          libft/ft_strnstr.c \
+                          libft/ft_strrchr.c \
+                          libft/ft_strtrim.c \
+                          libft/ft_substr.c \
+                          libft/ft_tolower.c \
+                          libft/ft_toupper.c \
+                          src/algorithm.c \
+                          src/movement.c \
+                          src/movement2.c \
+                          src/push_swap.c \
+                          src/put_index.c \
+                          src/push_swap_utils.c \
+                          src/small_sort.c \
+                          
+OBJS        := $(SRCS:.c=.o)
 
-CFLAGS	=	-Wall -Wextra -Werror
-CINC	=	-I./libft -I
-LLIB	=	-L./libft -lft -L
+.c.o:
+	${CC} ${FLAGS} -c $< -o ${<:.c=.o}
 
-ifeq ($(DEBUG), 1)
-	CFLAGS	+=	-g3 -fsanitize=address
-endif
+################################################################################
+#                                  Makefile  objs                              #
+################################################################################
 
-all: libft $(NAME)
 
-$(NAME): $(LIBFT_A) $(OBJ)
-	$(CC) $(LFLAGS) $(OBJ) $(LLIB) -o $@
+CLR_RMV		:= \033[0m
+RED		    := \033[1;31m
+GREEN		:= \033[1;32m
+YELLOW		:= \033[1;33m
+BLUE		:= \033[1;34m
+CYAN 		:= \033[1;36m
+RM		    := rm -f
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(INC) Makefile
-	mkdir -p $(@D)
-	$(CC) $(CFLAGS) $(CINC) -c $< -o $@
+${NAME}:	${OBJS}
+			@echo "$(GREEN)Compilation ${CLR_RMV}of ${YELLOW}$(NAME) ${CLR_RMV}..."
+			${CC} ${FLAGS} -o ${NAME} ${OBJS}
+			@echo "$(GREEN)$(NAME) created[0m ✔️"
 
-libft:
-	make -C ./libft
+all:		${NAME}
 
-re: fclean all
+bonus:		all
 
 clean:
-	rm -rf $(OBJ_DIR)
-	make -C ./libft clean
+			@ ${RM} *.o */*.o */*/*.o
+			@ echo "$(RED)Deleting $(CYAN)$(NAME) $(CLR_RMV)objs ✔️"
 
-fclean: clean
-	$(RM) $(NAME)
-	make -C ./libft fclean
+fclean:		clean
+			@ ${RM} ${NAME}
+			@ echo "$(RED)Deleting $(CYAN)$(NAME) $(CLR_RMV)binary ✔️"
 
-print:
-	@echo "\n-------------------- FILES --------------------\n"
-	@echo "NAME		$(NAME:%=\n%)\n"
-	@echo "INC		$(INC:%=\n%)\n"
-	@echo "SRC		$(SRC:%=\n%)\n"
-	@echo "OBJ		$(OBJ:%=\n%)\n"
-	@echo "\n-------------------- FLAGS --------------------\n"
-	@echo "LLIB		$(LLIB:%=\n%)\n"
-	@echo "LFLAGS	$(LFLAGS:%=\n%)\n"
-	@echo "CFLAGS	$(CFLAGS:%=\n%)\n"
-	@echo "CINC		$(CINC:%=\n%)\n"
+re:			fclean all
 
-.PHONY: all libft re clean fclean print
+.PHONY:		all clean fclean re
+
+
