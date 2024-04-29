@@ -3,76 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ismail <ismail@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ishouche <ishouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 10:14:43 by ishouche          #+#    #+#             */
-/*   Updated: 2024/04/22 04:16:31 by ismail           ###   ########.fr       */
+/*   Updated: 2024/04/29 16:27:12 by ishouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-bool	is_in_list(int	digit, t_list *a)
-{
-	while(a)
-	{
-		if (*(int*)a->content == digit)
-			return(true);
-		a = a->next;
-	}
-	return (false);
-}
-
-bool	is_number(char *final)
-{
-	int	i;
-
-	i = -1;
-	while(final[++i])
-		if (!ft_isdigit(final[i]))
-			return (false);
-	return (true);
-}
-
-bool	fit_in_int(char *final)
-{
-	int	i;
-	int	sign;
-	int	len;
-
-	sign = 1;
-	i = 0;
-	if(final[0] == '-')
-	{
-		sign *= -1;
-		i++;
-	}
-	if (final[0] == '+')
-		i++;
-	len = ft_strlen(final + i);
-	if (len > 10)
-		return (false);
-	if (len == 10)
-	{
-		if (sign == 1)
-			return (ft_strncmp(final + i, "2147483647", 10) <= 0);
-		return (ft_strncmp(final + i, "2147483648", 10) <= 0);
-	}
-	return(true);
-}
-
-void	free2D(char **final)
-{
-	int	i;
-
-	i = -1;
-	if(final)
-	{
-		while(final[++i])
-			free(final[i]);
-		free (final);
-	}
-}
 bool	parse_arg(char *str, t_list **a)
 {
 	char	**final;
@@ -129,19 +68,6 @@ bool	pile_is_sorted(t_list *a)
 	return (true);
 }
 
-int	pile_len(t_list *lst)
-{
-	int	i;
-
-	i = 0;
-	while(lst)
-	{
-		lst = lst->next;
-		i++;
-	}
-	return(i);
-}
-
 int	main(int argc, char **argv)
 {
 	t_list	*a;
@@ -157,8 +83,8 @@ int	main(int argc, char **argv)
 	{
 		if (pile_len(a) == 2)
 			sa(&a);
-		// else if (pile_len(a) <= 5)
-		// 	small_sort(&a, &b);
+		else if (pile_len(a) <= 5)
+			small_sort(&a, &b);
 		else
 		{
 			put_index(&a);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ismail <ismail@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ishouche <ishouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 10:09:05 by ishouche          #+#    #+#             */
-/*   Updated: 2024/04/22 04:09:05 by ismail           ###   ########.fr       */
+/*   Updated: 2024/04/29 16:04:01 by ishouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,18 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdio.h>
-# include "libft/libft.h"
+# include "../libft/libft.h"
 # include <limits.h>
 # include <stdbool.h>
+
+typedef struct s_info
+{
+    int num;
+    int size;
+    int max_num;
+    int max_bit;
+}   t_info;
+
 
 bool			pile_is_sorted(t_list *a);
 bool			parse(int argc, char **argv, t_list **a);
@@ -33,10 +42,11 @@ void			pa(t_list **a, t_list **b);
 void			pb(t_list **b, t_list **a);
 void			ra(t_list **a);
 void			rb(t_list **b);
+void	        rra(t_list **a);
 void			put_index(t_list **a);
 void			big_sort(t_list **a, t_list **b);
 int				pile_len(t_list *lst);
-static t_list	*get_min(t_list **a);
+// static t_list	*get_min(t_list **a);
 
 
 # endif
