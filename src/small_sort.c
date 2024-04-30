@@ -6,20 +6,43 @@
 /*   By: ismail <ismail@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 03:07:27 by ishouche          #+#    #+#             */
-/*   Updated: 2024/04/30 15:45:43 by ismail           ###   ########.fr       */
+/*   Updated: 2024/04/30 19:16:08 by ismail           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void    small_sort(t_list **a, t_list **b)
+int	difference(t_list **stack, int index)
 {
-    if (pile_len(*a) == 3)
-        sort_for_three(a);
-    else if (pile_len(*a) == 4)
-        sort_for_four(a, b);
-    else if (pile_len(*a) == 5)
-        sort_for_five(a, b);
+	t_list	*tmp;
+	int		diff;
+
+	diff = 0;
+	tmp = *stack;
+	while (tmp)
+	{
+		if (tmp->index == index)
+			break ;
+		diff++;
+		tmp = tmp->next;
+	}
+	return (diff);
+}
+
+static int	get_min(t_list **a, int val)
+{
+	t_list	*tmp;
+	int		min;
+
+	tmp = *a;
+	min = tmp->index;
+	while (tmp->next)
+	{
+		tmp = tmp->next;
+		if ((tmp->index < min) && tmp->index != val)
+			min = tmp->index;
+	}
+	return (min);
 }
 
 static void	sort_for_three(t_list **a)
@@ -29,8 +52,8 @@ static void	sort_for_three(t_list **a)
 	int		next_min;
 
 	tmp = *a;
-	min = get_min2(a, -1);
-	next_min = get_min2(a, min);
+	min = get_min(a, -1);
+	next_min = get_min(a, min);
 	if (pile_is_sorted(*a))
 		return ;
 	if (tmp->index == min && tmp->next->index != next_min)
@@ -64,7 +87,7 @@ static void	sort_for_four(t_list **a, t_list **b)
 
 	if (pile_is_sorted(*a))
 		return ;
-	diff = difference(a, get_min2(a, -1));
+	diff = difference(a, get_min(a, -1));
 	if (diff == 1)
 		ra(a);
 	else if (diff == 2)
@@ -85,7 +108,7 @@ void	sort_for_five(t_list **a, t_list **b)
 {
 	int	diff;
 
-	diff = difference(a, get_min2(a, -1));
+	diff = difference(a, get_min(a, -1));
 	if (diff == 1)
 		ra(a);
 	else if (diff == 2)
@@ -107,35 +130,14 @@ void	sort_for_five(t_list **a, t_list **b)
 	pa(a, b);
 }
 
-static int	get_min2(t_list **a, int val)
+void    small_sort(t_list **a, t_list **b)
 {
-	t_list	*tmp;
-	int		min;
-
-	tmp = *a;
-	min = tmp->index;
-	while (tmp->next)
+    if (pile_len(*a) == 3)
 	{
-		tmp = tmp->next;
-		if ((tmp->index < min) && tmp->index != val)
-			min = tmp->index;
+		sort_for_three(a);
 	}
-	return (min);
-}
-
-int	get_distance(t_list **stack, int index)
-{
-	t_list	*head;
-	int		distance;
-
-	distance = 0;
-	head = *stack;
-	while (head)
-	{
-		if (head->index == index)
-			break ;
-		distance++;
-		head = head->next;
-	}
-	return (distance);
+    else if (pile_len(*a) == 4)
+        sort_for_four(a, b);
+    else if (pile_len(*a) == 5)
+        sort_for_five(a, b);
 }

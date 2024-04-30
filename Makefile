@@ -1,6 +1,6 @@
 #  |  |  ___ \    \  |         |
-#  |  |     ) |  |\/ |   _  |  |  /   _ 
-# ___ __|  __/   |   |  (   |    <    __/ 
+#  |  |     ) |  |\/ |   _  |  |  /   _
+# ___ __|  __/   |   |  (   |    <    __/
 #    _|  _____| _|  _| \__,_| _|\_\ \___|
 #                              by jcluzet
 ################################################################################
@@ -8,8 +8,8 @@
 ################################################################################
 
 NAME        := push_swap
-CC        := gcc
-FLAGS    := -Wall -Wextra -Werror 
+CC        := cc
+FLAGS    := -Wall -Wextra -Werror
 ################################################################################
 #                                 PROGRAM'S SRCS                               #
 ################################################################################
@@ -37,8 +37,6 @@ SRCS        :=      libft/ft_atoi.c \
                           libft/ft_memcpy.c \
                           libft/ft_memmove.c \
                           libft/ft_memset.c \
-                          libft/ftprintf2.c \
-                          libft/ftprintf.c \
                           libft/ft_putchar_fd.c \
                           libft/ft_putendl_fd.c \
                           libft/ft_putnbr_fd.c \
@@ -66,7 +64,7 @@ SRCS        :=      libft/ft_atoi.c \
                           src/put_index.c \
                           src/push_swap_utils.c \
                           src/small_sort.c \
-                          
+
 OBJS        := $(SRCS:.c=.o)
 
 .c.o:
@@ -105,5 +103,3 @@ fclean:		clean
 re:			fclean all
 
 .PHONY:		all clean fclean re
-
-
