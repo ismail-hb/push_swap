@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   small_sort.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ishouche <ishouche@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ismail <ismail@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 03:07:27 by ishouche          #+#    #+#             */
-/*   Updated: 2024/04/29 19:39:28 by ishouche         ###   ########.fr       */
+/*   Updated: 2024/04/30 15:45:43 by ismail           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,4 +121,21 @@ static int	get_min2(t_list **a, int val)
 			min = tmp->index;
 	}
 	return (min);
+}
+
+int	get_distance(t_list **stack, int index)
+{
+	t_list	*head;
+	int		distance;
+
+	distance = 0;
+	head = *stack;
+	while (head)
+	{
+		if (head->index == index)
+			break ;
+		distance++;
+		head = head->next;
+	}
+	return (distance);
 }
