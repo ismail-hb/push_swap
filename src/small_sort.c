@@ -6,28 +6,11 @@
 /*   By: ismail <ismail@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 03:07:27 by ishouche          #+#    #+#             */
-/*   Updated: 2024/04/30 19:16:08 by ismail           ###   ########.fr       */
+/*   Updated: 2024/04/30 23:12:55 by ismail           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-int	difference(t_list **stack, int index)
-{
-	t_list	*tmp;
-	int		diff;
-
-	diff = 0;
-	tmp = *stack;
-	while (tmp)
-	{
-		if (tmp->index == index)
-			break ;
-		diff++;
-		tmp = tmp->next;
-	}
-	return (diff);
-}
 
 static int	get_min(t_list **a, int val)
 {

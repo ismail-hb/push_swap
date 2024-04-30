@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   put_index.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ishouche <ishouche@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ismail <ismail@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 03:16:54 by ismail            #+#    #+#             */
-/*   Updated: 2024/04/26 03:33:47 by ishouche         ###   ########.fr       */
+/*   Updated: 2024/04/30 23:13:03 by ismail           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,21 @@ void	put_index(t_list **a)
 		head->index = index++;
 		head = get_min(a);
 	}
+}
+
+int	difference(t_list **stack, int index)
+{
+	t_list	*tmp;
+	int		diff;
+
+	diff = 0;
+	tmp = *stack;
+	while (tmp)
+	{
+		if (tmp->index == index)
+			break ;
+		diff++;
+		tmp = tmp->next;
+	}
+	return (diff);
 }

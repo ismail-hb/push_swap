@@ -6,7 +6,7 @@
 /*   By: ismail <ismail@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 10:14:43 by ishouche          #+#    #+#             */
-/*   Updated: 2024/04/30 19:17:07 by ismail           ###   ########.fr       */
+/*   Updated: 2024/04/30 23:34:52 by ismail           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ bool	parse_arg(char *str, t_list **a)
 		*digit = ft_atoi(final[i]);
 		new = ft_lstnew(digit);
 		if(is_in_list(*digit, *a))
-			return(free2D(final), ft_lstclear(a, free), false);
+			return(free2D(final), ft_lstclear(a, free),
+				free(digit), free(new), false);
 		ft_lstadd_back(a, new);
 	}
 	return (free2D(final), true);
@@ -87,9 +88,7 @@ int	main(int argc, char **argv)
 		else if (pile_len(a) <= 5)
 			small_sort(&a, &b);
 		else
-		{
 			big_sort(&a, &b);
-		}
 	}
 	while (a)
 	{

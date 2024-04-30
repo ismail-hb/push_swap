@@ -6,7 +6,7 @@
 /*   By: ismail <ismail@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 10:09:05 by ishouche          #+#    #+#             */
-/*   Updated: 2024/04/30 19:14:38 by ismail           ###   ########.fr       */
+/*   Updated: 2024/04/30 23:14:22 by ismail           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,8 @@ void            rra(t_list **a);
 void			put_index(t_list **a);
 void			big_sort(t_list **a, t_list **b);
 void            small_sort(t_list **a, t_list **b);
-// int				pile_len(t_list *lst);
-// int      get_min2(t_list **a, int val);
-// void     sort_for_four(t_list **a, t_list **b);
-// void     sort_for_three(t_list **a);
 void            sort_for_five(t_list **a, t_list **b);
 int             pile_len(t_list *lst);
-
+int             difference(t_list **stack, int index);
 
 # endif
