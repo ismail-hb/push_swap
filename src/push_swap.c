@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ismail <ismail@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ishouche <ishouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 10:14:43 by ishouche          #+#    #+#             */
-/*   Updated: 2024/04/30 23:34:52 by ismail           ###   ########.fr       */
+/*   Updated: 2024/05/01 00:17:59 by ishouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,23 +21,23 @@ bool	parse_arg(char *str, t_list **a)
 
 	final = ft_split(str, ' ');
 	if (!final || !final[0])
-		return (free2D(final), false);
+		return (free_deux_d(final), false);
 	i = -1;
 	while (final[++i])
 	{
 		if (!is_number(final[i]) || !fit_in_int(final[i]))
-			return (free2D(final), ft_lstclear(a, free), false);
+			return (free_deux_d(final), ft_lstclear(a, free), false);
 		digit = malloc(sizeof(int));
 		if (!digit)
-			return (free2D(final), ft_lstclear(a, free), false);
+			return (free_deux_d(final), ft_lstclear(a, free), false);
 		*digit = ft_atoi(final[i]);
 		new = ft_lstnew(digit);
-		if(is_in_list(*digit, *a))
-			return(free2D(final), ft_lstclear(a, free),
+		if (is_in_list(*digit, *a))
+			return (free_deux_d(final), ft_lstclear(a, free),
 				free(digit), free(new), false);
 		ft_lstadd_back(a, new);
 	}
-	return (free2D(final), true);
+	return (free_deux_d(final), true);
 }
 
 bool	parse(int argc, char **argv, t_list **a)
@@ -47,7 +47,7 @@ bool	parse(int argc, char **argv, t_list **a)
 	i = 0;
 	while (++i < argc)
 		if (!parse_arg(argv[i], a))
-			return(false);
+			return (false);
 	return (true);
 }
 
@@ -56,14 +56,14 @@ bool	pile_is_sorted(t_list *a)
 	int	tmp;
 
 	if (!a)
-		return(false);
-	tmp = *(int*)a->content;
+		return (false);
+	tmp = *(int *)a->content;
 	a = a->next;
-	while(a)
+	while (a)
 	{
-		if (*(int*)a->content < tmp)
-			return(false);
-		tmp = *(int*)a->content;
+		if (*(int *)a->content < tmp)
+			return (false);
+		tmp = *(int *)a->content;
 		a = a->next;
 	}
 	return (true);
@@ -77,7 +77,7 @@ int	main(int argc, char **argv)
 	a = NULL;
 	b = NULL;
 	if (argc == 1)
-		return(1);
+		return (1);
 	if (!parse(argc, argv, &a))
 		return (write(2, "Error\n", 6), 1);
 	if (!pile_is_sorted(a))
@@ -92,9 +92,9 @@ int	main(int argc, char **argv)
 	}
 	while (a)
 	{
-		printf("a : %i\n", *(int*)a->content);
+		printf("a : %i\n", *(int *)a->content);
 		a = a->next;
 	}
 	ft_lstclear(&a, free);
-	return(0);
+	return (0);
 }

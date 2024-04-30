@@ -6,7 +6,7 @@
 /*   By: ishouche <ishouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 16:22:27 by ismail            #+#    #+#             */
-/*   Updated: 2024/04/29 19:01:31 by ishouche         ###   ########.fr       */
+/*   Updated: 2024/04/30 23:44:44 by ishouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,17 @@
 
 void	sa(t_list **a)
 {
-	 t_list	*tmp;
+	t_list	*tmp;
 
 	tmp = (*a)->next->content;
 	(*a)->next->content = (*a)->content;
 	(*a)->content = tmp;
 	write(1, "sa\n", 3);
 }
+
 void	sb(t_list **b)
 {
-	 t_list	*tmp;
+	t_list	*tmp;
 
 	tmp = (*b)->next->content;
 	(*b)->next->content = (*b)->content;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   put_index.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ismail <ismail@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ishouche <ishouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 03:16:54 by ismail            #+#    #+#             */
-/*   Updated: 2024/04/30 23:13:03 by ismail           ###   ########.fr       */
+/*   Updated: 2024/04/30 23:53:19 by ishouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static t_list	*get_min(t_list **a)
 		{
 			if (head->index == -1)
 			{
-				if (is_min == 0 || *(int*)head->content < *(int*)min->content)
+				if (is_min == 0 || *(int *)head->content < *(int *)min->content)
 				{
 					min = head;
 					is_min = 1;
@@ -68,4 +68,15 @@ int	difference(t_list **stack, int index)
 		tmp = tmp->next;
 	}
 	return (diff);
+}
+
+void	small_sft(t_list *tmp, t_list **a, int min)
+{
+	if (tmp->next->index == min)
+		ra(a);
+	else
+	{
+		sa(a);
+		rra(a);
+	}
 }

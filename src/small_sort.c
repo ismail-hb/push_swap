@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   small_sort.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ismail <ismail@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ishouche <ishouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 03:07:27 by ishouche          #+#    #+#             */
-/*   Updated: 2024/04/30 23:12:55 by ismail           ###   ########.fr       */
+/*   Updated: 2024/05/01 00:15:13 by ishouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,15 +53,7 @@ static void	sort_for_three(t_list **a)
 			rra(a);
 	}
 	else
-	{
-		if (tmp->next->index == min)
-			ra(a);
-		else
-		{
-			sa(a);
-			rra(a);
-		}
-	}
+		small_sft(tmp, a, min);
 }
 
 static void	sort_for_four(t_list **a, t_list **b)
@@ -82,7 +74,7 @@ static void	sort_for_four(t_list **a, t_list **b)
 		rra(a);
 	if (pile_is_sorted(*a))
 		return ;
-	pb(a, b);
+	pb(b, a);
 	sort_for_three(a);
 	pa(a, b);
 }
@@ -108,19 +100,17 @@ void	sort_for_five(t_list **a, t_list **b)
 		rra(a);
 	if (pile_is_sorted(*a))
 		return ;
-	pb(a, b);
+	pb(b, a);
 	sort_for_four(a, b);
 	pa(a, b);
 }
 
-void    small_sort(t_list **a, t_list **b)
+void	small_sort(t_list **a, t_list **b)
 {
-    if (pile_len(*a) == 3)
-	{
+	if (pile_len(*a) == 3)
 		sort_for_three(a);
-	}
-    else if (pile_len(*a) == 4)
-        sort_for_four(a, b);
-    else if (pile_len(*a) == 5)
-        sort_for_five(a, b);
+	else if (pile_len(*a) == 4)
+		sort_for_four(a, b);
+	else if (pile_len(*a) == 5)
+		sort_for_five(a, b);
 }

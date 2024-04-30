@@ -6,7 +6,7 @@
 /*   By: ishouche <ishouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 03:04:57 by ishouche          #+#    #+#             */
-/*   Updated: 2024/04/29 15:54:13 by ishouche         ###   ########.fr       */
+/*   Updated: 2024/04/30 23:45:03 by ishouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,15 +51,15 @@ void	rra(t_list **a)
 	t_list	*tmp;
 	t_list	*first_node;
 	t_list	*before_last;
-	
+
 	if (*a == NULL || (*a)->next == NULL)
 		return ;
 	tmp = *a;
 	first_node = *a;
 	before_last = *a;
-	while(tmp->next)
+	while (tmp->next)
 		tmp = tmp->next;
-	while(before_last->next != tmp)
+	while (before_last->next != tmp)
 		before_last = before_last->next;
 	tmp->next = first_node;
 	before_last->next = NULL;

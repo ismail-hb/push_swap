@@ -6,7 +6,7 @@
 /*   By: ishouche <ishouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 00:31:38 by ismail            #+#    #+#             */
-/*   Updated: 2024/04/29 16:02:31 by ishouche         ###   ########.fr       */
+/*   Updated: 2024/04/30 23:44:07 by ishouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	big_sort(t_list **a, t_list **b)
 			else
 				pb(b, a);
 		}
-		while(pile_len(*b) != 0)
+		while (pile_len(*b) != 0)
 			pa(a, b);
 	}
 }
