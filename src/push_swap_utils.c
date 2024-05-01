@@ -6,7 +6,7 @@
 /*   By: ishouche <ishouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 03:09:20 by ishouche          #+#    #+#             */
-/*   Updated: 2024/04/30 23:47:25 by ishouche         ###   ########.fr       */
+/*   Updated: 2024/05/02 01:42:40 by ishouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,16 @@ bool	is_number(char *final)
 
 	i = -1;
 	while (final[++i])
+	{
 		if (!ft_isdigit(final[i]))
-			return (false);
+		{
+			if ((final[i] == '-' || final[i] == '+')
+				&& ft_isdigit(final[i + 1]))
+				break ;
+			else
+				return (false);
+		}
+	}
 	return (true);
 }
 

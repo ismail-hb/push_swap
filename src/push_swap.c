@@ -6,7 +6,7 @@
 /*   By: ishouche <ishouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 10:14:43 by ishouche          #+#    #+#             */
-/*   Updated: 2024/05/01 00:17:59 by ishouche         ###   ########.fr       */
+/*   Updated: 2024/05/02 01:43:17 by ishouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ bool	parse_arg(char *str, t_list **a)
 		new = ft_lstnew(digit);
 		if (is_in_list(*digit, *a))
 			return (free_deux_d(final), ft_lstclear(a, free),
-				free(digit), free(new), false);
+				free(digit), false);
 		ft_lstadd_back(a, new);
 	}
 	return (free_deux_d(final), true);
@@ -90,11 +90,7 @@ int	main(int argc, char **argv)
 		else
 			big_sort(&a, &b);
 	}
-	while (a)
-	{
-		printf("a : %i\n", *(int *)a->content);
-		a = a->next;
-	}
 	ft_lstclear(&a, free);
+	ft_lstclear(&b, free);
 	return (0);
 }
